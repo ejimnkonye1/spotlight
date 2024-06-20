@@ -19,6 +19,10 @@ export const Moviedetails = () => {
     const [mainImage, setMainImage] = useState('');
     const [genres, setGenres] = useState([]);
     const [releaseDate , setReleaseDate] = useState('')
+
+    const handleBack = () => {
+        
+    }
     useEffect(() => {
         const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
         const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
