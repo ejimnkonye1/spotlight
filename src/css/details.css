@@ -153,10 +153,11 @@
   .overview{
     /* position: absolute; */
     position: absolute;
-    top: 24%;
+    top: 20%;
     overflow:  hidden !important;
     color: #000 !important;
     left: 0;
+    margin: 30px;
   }  
   .over{
     width: 100% !important;
