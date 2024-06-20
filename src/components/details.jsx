@@ -9,6 +9,7 @@ import { PiTelevisionDuotone } from "react-icons/pi";
 import { MdArrowBackIos } from "react-icons/md";
 import { IoIosStar } from "react-icons/io";
 import { CiClock2 } from "react-icons/ci";
+import { Header } from './header';
 export const Moviedetails = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState(null);
@@ -19,6 +20,8 @@ export const Moviedetails = () => {
     const [mainImage, setMainImage] = useState('');
     const [genres, setGenres] = useState([]);
     const [releaseDate , setReleaseDate] = useState('')
+
+
     useEffect(() => {
         const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
         const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
@@ -105,26 +108,7 @@ export const Moviedetails = () => {
         <div className=" movie-details-container "  >
            
      <div className='back container-fluid' style={moviepic} >
-     <nav class="navbar ">
-  <div class="container">
-    <div className='icon-head'>
-        
-    <MdArrowBackIos className='' />
-   
-    </div>
-  
-   <div className='d-flex'>
-   <div className="icon-head m-2" >
-            <LuPlus className='plus-icon' />
-          </div>
-          <div className="icon-head m-2">
-              <PiTelevisionDuotone className='tv' />
-            </div>
-   </div>
-   
-
-  </div>
-</nav>
+    <Header  />
 
 
 
