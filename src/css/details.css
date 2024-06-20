@@ -1,0 +1,97 @@
+.img-det{
+    /* width: 400vh !important; */
+    width: 100%;
+    flex: 1;
+    max-height: 25rem;
+    object-fit: cover;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    
+}
+/* .button-side{
+    position: relative;
+    left: 5px;
+} */
+ .subheading{
+        color: #0c202e; 
+     font-family: clashG; 
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -.054rem;
+    margin: 10px;
+    position: relative;
+    top:10px
+
+ }
+ .subheading-2{
+    color: #0c202e; 
+    font-family: clashG; 
+   font-size: 1.1rem;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 2rem;
+   letter-spacing: -.054rem;
+   margin: 10px;
+
+ }
+ .blue-button{
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    background: #3A9FE8;
+    box-shadow: 0 2px 8px #89c5f1;
+    -webkit-border-radius: 5px;
+ }
+.sec-button{
+    border-radius: .8rem;
+    border: 1px solid rgba(0, 0, 0, .11);
+    background: var(--white, #FFF);
+    box-shadow: 0 2px 8px #4d4d4d12;
+    padding: .5rem .4rem;
+    
+
+}
+ .text-style{
+    color: #000;
+    font-family: manrope;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -.012rem;
+}
+
+/* icons css */
+.icon-head{
+    width: 40px;
+    height: 40px;
+    border: 2px solid #89c5f1;
+    border-radius: 20%;
+    overflow: hidden; /* Ensures the image fits within the circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #89c5f1;
+}
+.overview{
+    position: relative;
+    top: 20%;
+    color: #fff;
+}
+
+.star{
+    color: yellow;
+    
+}
+.rate{
+    font-size: small;
+    color: #FFF !important;
+}
+.run{
+    font-size: small;
+}
