@@ -126,19 +126,23 @@ export const Moviedetails = () => {
   </div>
 </nav>
 
-<div className="overview container ">
+
+
+
+     </div>
+     <div className="overview container ">
           {movie && (
             <div>
               <div className='text-white'>
               <h6 className="title">{movie.title}({year})</h6>
-              <div className='d-flex'>
+              <div className='d-flex icon'>
               <p className='p-1'><IoIosStar  className='star'/> <span className='rate'>{rating}/10</span></p>
               <p className='p-1'> <CiClock2 /> <span className='run'>{formattedRuntime}</span></p>
                 </div>
               </div>
               <div>
                 <h6 className='title-over'>Overview</h6>
-                <p className='w-50 over'>{movie.overview}</p>
+                <p className=' over'>{movie.overview}</p>
               </div>
            
               
@@ -156,12 +160,8 @@ export const Moviedetails = () => {
             </div>
           )}
         </div>
-
-
-     </div>
-   
      
-     <div class="container-fluid">
+      <div class="container-fluid thriller-image">
         <div class="row m-1">
           
             <div class="col-12 col-md-12 col-lg-6">
@@ -248,12 +248,12 @@ style={{
         </div>
       </div>
             </div>
-        </div>
+        </div> 
     
 
     {/* more container */}
 
-    <div class="container=-fluid">
+    <div class="container=-fluid relate-items">
         <div class="row m-3">
 
             <div class="col-12 col-md-12 col-lg-6 button-side">
@@ -315,7 +315,7 @@ style={{
 
             </div>
         </div>
-    </div>
+    </div> 
         </div>
     )
 
