@@ -24,7 +24,10 @@ export const Moviedetails = () => {
 
     }
     const handleFav = () => {
-        
+
+    }
+    const handleWatch = () => {
+
     }
     useEffect(() => {
         const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
