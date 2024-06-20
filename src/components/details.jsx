@@ -114,8 +114,9 @@ export const Moviedetails = () => {
 
 
      </div>
-     <div className="overview container ">
-          {movie && (
+     <div className="container ">
+        <div className='overview'>
+        {movie && (
             <div>
               <div className='text-white'>
               <h6 className="title">{movie.title}({year})</h6>
@@ -143,6 +144,8 @@ export const Moviedetails = () => {
               </div>
             </div>
           )}
+        </div>
+         
         </div>
      
       <div class="container-fluid thriller-image">
