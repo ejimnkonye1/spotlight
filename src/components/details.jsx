@@ -18,6 +18,7 @@ export const Moviedetails = () => {
     const [movieImages, setMovieImages] = useState([]);
     const [mainImage, setMainImage] = useState('');
     const [genres, setGenres] = useState([]);
+    const [releaseDate , setReleaseDate] = useState('')
     useEffect(() => {
         const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
         const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
@@ -25,18 +26,23 @@ export const Moviedetails = () => {
         const relatedMoviesUrl = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}&language=en-US`;
         const imagesUrl = `https://api.themoviedb.org/3/movie/${id}/images?api_key=${apiKey}`;
         const genresResponseurl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
-           
+
     
-        // Fetch movie details
+        // Fetch movie details and releseaDate
         axios
           .get(movieUrl)
           .then((response) => {
             setMovie(response.data);
-              setLoading(false);
-              axios.get(genresResponseurl)
-              .then((genresResponse) => {
-              setGenres(genresResponse.data.genres)
-              })
+            setReleaseDate(response.data.release_date);
+            setGenres(response.data.genres)
+        })
+          .catch((error) => {
+          console.error('Error fetching movie details:', error);
+          setLoading(false);
+        });
+             
+             
+              // fetch related movie
             axios.get(relatedMoviesUrl)
           .then((relatedResponse) => {
             setRelatedMovies(relatedResponse.data.results.slice(0,4));
@@ -45,6 +51,8 @@ export const Moviedetails = () => {
             console.error('Error fetching related movies:', relatedError);
           });
     
+
+        //   fetch images detials
           axios.get(imagesUrl)
           .then((imagesResponse) => {
             setMovieImages(imagesResponse.data.backdrops);
@@ -56,6 +64,10 @@ export const Moviedetails = () => {
           .catch((imagesError) => {
             console.error('Error fetching movie images:', imagesError);
           });
+
+
+
+
             // Fetch trailer key
             axios.get(videosUrl)
               .then((videosResponse) => {
@@ -67,11 +79,7 @@ export const Moviedetails = () => {
               .catch((videosError) => {
                 console.error('Error fetching movie videos:', videosError);
               });
-          })
-          .catch((error) => {
-            console.error('Error fetching movie details:', error);
-            setLoading(false);
-          });
+        
       }, [id]);
       if (!movie) {
         return <p>Movie not found.</p>;
@@ -90,16 +98,11 @@ export const Moviedetails = () => {
   const hours = Math.floor(runtime / 60);
   const minutes = runtime % 60;
   const formattedRuntime = `${hours} hour ${minutes}  minutes`;
-  const getGenreNames = () => {
-    const genreNames = movie.genre_ids.map(genreId => {
-      const genre = genres.find(g => g.id === genreId);
-      return genre ? genre.name : 'Unknown';
-    });
-    return genreNames.join(', ');
-  };
+  const date = new Date(releaseDate)
+  const year = date.getFullYear()
     return(
 
-        <div className="container-fluid movie-details-container " >
+        <div className="container-fluid movie-details-container " style={moviepic} >
            
      <div className='back' style={moviepic} >
      <nav class="navbar ">
@@ -126,20 +129,30 @@ export const Moviedetails = () => {
 <div className="overview container ">
           {movie && (
             <div>
-              <div>
-              <p className="">{movie.title}</p>
-              </div>
-              <div>
-                <h6>Overview</h6>
-                <p className='w-50'>{movie.overview}</p>
-              </div>
+              <div className='text-white'>
+              <h6 className="title">{movie.title}({year})</h6>
               <div className='d-flex'>
               <p className='p-1'><IoIosStar  className='star'/> <span className='rate'>{rating}/10</span></p>
               <p className='p-1'> <CiClock2 /> <span className='run'>{formattedRuntime}</span></p>
                 </div>
+              </div>
+              <div>
+                <h6 className='title-over'>Overview</h6>
+                <p className='w-50 over'>{movie.overview}</p>
+              </div>
+           
               
              
-              <p>Genre: </p>
+              <div className=''>
+                <h6 className='mb-3 genre-head'>Genre</h6>
+              <div className='genres'>
+         {genres.map(genre => (
+              <span key={genre.id} className="genre">
+                {genre.name}
+              </span>
+            ))}
+          </div>
+              </div>
             </div>
           )}
         </div>

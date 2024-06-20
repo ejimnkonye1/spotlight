@@ -1,3 +1,51 @@
+.title{
+    /* color: #0c202e; */
+    font-family: clashG;
+    font-size: 2.0rem;
+    font-style: normal;
+    font-weight: 600;
+    /* letter-spacing: -.024rem; */
+}
+.title-over{
+    
+    font-family: clashG;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -.054rem;
+}
+.over{
+    font-family: manrope;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    /* line-height: 2.3rem; */
+    letter-spacing: -.028rem;
+}
+.genre-head{
+    font-family: clashG;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -.054rem;
+}
+.genres{
+    margin: -0.5rem;
+}
+.genre  {
+    border-radius: .8rem;
+    border: 1px solid #803131;
+    background-color: transparent;
+    padding: 0.5rem;
+    border-color: #fff;
+    margin: 0.1rem;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    font-family: manrope;
+}
 .img-det{
     /* width: 400vh !important; */
     width: 100%;
