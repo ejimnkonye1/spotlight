@@ -102,9 +102,9 @@ export const Moviedetails = () => {
   const year = date.getFullYear()
     return(
 
-        <div className="container-fluid movie-details-container " style={moviepic} >
+        <div className=" movie-details-container "  >
            
-     <div className='back' style={moviepic} >
+     <div className='back container-fluid' style={moviepic} >
      <nav class="navbar ">
   <div class="container">
     <div className='icon-head'>
@@ -164,7 +164,7 @@ export const Moviedetails = () => {
      <div class="container-fluid">
         <div class="row m-1">
           
-            <div class="col-6">
+            <div class="col-12 col-md-12 col-lg-6">
                 <h6 className='subheading'>Thriller</h6>
                 <div className="movie-image-container details mt-3 card rounded m-2"
 
@@ -197,7 +197,7 @@ style={{
 </div>
             </div>
         
-            <div class="col-6">
+            <div class="col-12 col-md-12 col-lg-6">
                 <h6 className='subheading'>Images</h6>
                 <div className="movie-image-container details mt-3 card rounded m-2"
           style={{
@@ -256,7 +256,7 @@ style={{
     <div class="container=-fluid">
         <div class="row m-3">
 
-            <div class="col-6 button-side">
+            <div class="col-12 col-md-12 col-lg-6 button-side">
                 <h6 className='subheading-2'>More</h6>
               <div className='big-button'>
                 <button  style={{
@@ -286,7 +286,7 @@ style={{
               </div>
             </div>
            
-            <div class="col-6 mb-4">
+            <div class="col-12 col-md-12 col-lg-6 mb-4">
             <div className='related-movies-container ' style={{ overflowX: 'auto', width: "%" }}>
         <h6 className='subheading-2'>Related Movies</h6>
         <div className='d-flex flex-row'>

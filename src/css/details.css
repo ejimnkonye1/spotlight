@@ -143,3 +143,28 @@
 .run{
     font-size: small;
 }
+.movie-details-container{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+}
+@media (max-width : 765px) {
+  .overview{
+    /* position: absolute; */
+    z-index: 5;
+    margin-bottom: 20px;
+  }  
+  .title-over{
+    position: absolute;
+    z-index: 10;
+  }
+.back{
+    width: 100% !important;
+    min-width: 100%;
+    height: 40vh !important;
+    overflow: hidden !important;
+    
+    background-size: contain;
+}
+
+}
