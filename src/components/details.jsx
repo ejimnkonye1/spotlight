@@ -21,6 +21,9 @@ export const Moviedetails = () => {
     const [releaseDate , setReleaseDate] = useState('')
 
     const handleBack = () => {
+
+    }
+    const handleFav = () => {
         
     }
     useEffect(() => {
