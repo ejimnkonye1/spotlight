@@ -1,11 +1,11 @@
 .search-results{
     position: relative;
-    height: 450px;
+    height: 484px;
     overflow-y: auto;
 }
 .user-list{
     position: relative;
-    height: 300px;
+    height: 400px;
     overflow-y: auto;
 }
 .search-input{
@@ -32,7 +32,7 @@
   .search-title {
     color: #0c202e;
     font-family: clashG;
-    font-size: 2.4rem;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 600;
     letter-spacing: -0.024rem;
@@ -40,7 +40,7 @@
   
   .search-overview {
     font-family: manrope;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
     line-height: 2.3rem;
@@ -52,18 +52,50 @@
     flex-direction: column;
   }
   
-  .big-button {
-    margin-bottom: 10px;
+  .big-button-more {
+    
+    margin: 10px;
   }
   
-  .blue-button {
-    /* Your existing button styles */
-  }
-  
-  .sec-button {
-    /* Your existing button styles */
-  }
-  
-  .text-style {
-    /* Your existing text styles */
-  }
+ .cl{
+    background: linear-gradient(214deg, rgba(176, 217, 246, .45) .61%, rgba(216, 250, 240, .31) 20.07%, rgba(250, 250, 250, 0) 80.02%);
+height: 100vh;
+ }
+ .bor-bot {
+    border: 4px solid red;
+    padding: -10px;
+    width: 200px;
+ }
+ .user{
+    margin: -11px;
+    
+    height: 100vh !important;
+ }
+ .text-styl{
+    color: #000;
+    font-family: manrope;
+    font-size: 1.0rem;
+    font-style: normal;
+    
+    line-height: 1.5rem; 
+ }
+ .blue-butto{
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    background: #3A9FE8;
+    box-shadow: 0 2px 8px #89c5f1;
+    
+ }
+.sec-butto{
+    border-radius: .8rem;
+    border: 1px solid rgba(0, 0, 0, .11);
+    background: var(--white, #FFF);
+    box-shadow: 0 2px 8px #4d4d4d12;
+    padding: .3rem .4rem;
+    
+
+}

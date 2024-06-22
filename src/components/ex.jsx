@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { LuPlus } from "react-icons/lu";
 import { MdArrowOutward } from "react-icons/md";
 import { PiTelevisionDuotone } from "react-icons/pi";
+import { CiViewList } from "react-icons/ci";
 const Ex = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -30,18 +31,18 @@ const Ex = () => {
   
     return(
       
-      <div className="container-fluid py-2 ">
+      <div className="container-fluid  ">
         <div className="row">
           <div className="col-md-12">
     <div className="" id="chat3">
           <div className="">
      <div className="row">
 
-                <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0 card">
+                <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0 ">
         <div className="user ">
                      
-                      <div class="list border-bottom  p-3 bg-light">
-        <i class="fas fa-clipboard-list"></i> Your List
+                      <div class="list border-bottom  p-4 ">
+                      <CiViewList size={40} className="viewl" /> <span>Your list</span>
     </div>
     
                       <div className="user-list" >
@@ -54,13 +55,14 @@ const Ex = () => {
     </div>
 
                       </div>
-                      <div class=" p-3 content-bottom bg-light border-top">
+                      <div class=" p-2 mt-5 content-bottom  border-top">
+                        {/* <div className="bor-bot"></div> */}
         <p class="text-center mb-0">Footer content</p>
     </div>
                     </div>
                   </div>
 
-  <div className="col-md-6 col-lg-7 col-xl-9 " >
+  <div className="col-md-6 col-lg-7 col-xl-9 cl card " >
   <div className="search-results">
   {searchResults.map((movie) => (
     <div key={movie.id} className="d-flex search-item">
@@ -79,16 +81,16 @@ const Ex = () => {
           <p className="search-overview">{movie.overview}</p>
         </div>
         <div className="more-se">
-          <div className="big-button">
-            <button className="blue-button">
-              More Info About This Movie <MdArrowOutward />
+          <div className="big-button-more">
+            <button className="blue-butto">
+            About This Movie <MdArrowOutward />
             </button>
           </div>
-          <div className="d-flex justify-content-between mt-2">
-            <button className="sec-button text-style" style={{ width: "50%", margin: "5px" }}>
+          <div className="d-flex justify-content-between ">
+            <button className="sec-butto text-styl" style={{ width: "50%", margin: "10px" }}>
               <LuPlus /> Add to favourite
             </button>
-            <button className="sec-button text-style" style={{ width: "50%", margin: "5px" }}>
+            <button className="sec-butto text-styl" style={{ width: "50%", margin: "10px" }}>
               <PiTelevisionDuotone /> Watch now
             </button>
           </div>
