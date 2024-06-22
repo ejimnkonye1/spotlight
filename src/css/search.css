@@ -1,0 +1,69 @@
+.search-results{
+    position: relative;
+    height: 450px;
+    overflow-y: auto;
+}
+.user-list{
+    position: relative;
+    height: 300px;
+    overflow-y: auto;
+}
+.search-input{
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    margin-top: 0.5rem;
+}
+.search-input input {
+    flex-grow: 1;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .search-img{
+    border-radius: 10%;
+  }
+  
+.search-item {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .search-title {
+    color: #0c202e;
+    font-family: clashG;
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -0.024rem;
+  }
+  
+  .search-overview {
+    font-family: manrope;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2.3rem;
+    letter-spacing: -0.028rem;
+  }
+  
+  .more-se {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .big-button {
+    margin-bottom: 10px;
+  }
+  
+  .blue-button {
+    /* Your existing button styles */
+  }
+  
+  .sec-button {
+    /* Your existing button styles */
+  }
+  
+  .text-style {
+    /* Your existing text styles */
+  }
