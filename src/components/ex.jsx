@@ -56,9 +56,16 @@ console.log("added", movie)
                       <div className="user-list" >
                       <div class="container mt-3">
         <div class="content">
-            <p>Your content goes here.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            {favourite && <p>{favourite}</p>}
+           
+            <ul class="list-group">
+        {favourite.map((favMovie, index) => (
+          <li className="list-group-item list-group-item-primary"
+           key={index}>{favMovie.title}</li>
+        ))}
+      </ul>
+
+           
+
         </div>
     </div>
 
@@ -95,7 +102,7 @@ console.log("added", movie)
             </button>
           </div>
           <div className="d-flex justify-content-between ">
-            <button className="sec-butto text-styl" onClick={()=> addtofav(movie.title)} style={{ width: "50%", margin: "10px" }}>
+            <button className="sec-butto text-styl" onClick={()=> addtofav(movie)} style={{ width: "50%", margin: "10px" }}>
               <LuPlus /> Add to favourite
             </button>
             <button className="sec-butto text-styl" style={{ width: "50%", margin: "10px" }}>

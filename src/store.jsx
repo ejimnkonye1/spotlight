@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 const initialstate = {
-    favourite : '',
+    favourite : [],
     favour: ''
 }
 
@@ -10,7 +10,7 @@ const reducer = (state = initialstate, action) => {
     case "SET_FAVOURITE":
          return{
         ...state,
-        favourite:action.payload
+        favourite: [...state.favourite, action.payload],//made array 
     }
         
      
