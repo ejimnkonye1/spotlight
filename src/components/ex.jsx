@@ -14,7 +14,8 @@ const Ex = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [query, setQuery] = useState('');
-    
+    const [count , setCount] = useState('')
+
     const dispatch = useDispatch()
    const favourite = useSelector((state) => state.favourite)
    
@@ -35,7 +36,7 @@ const Ex = () => {
             setLoading(false);
           };
     };
-    const count = a += 1
+    
  
    const addtofav = (movie) => {
 dispatch(setFAV(movie))
