@@ -1,15 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 const initialstate = {
-    favourite : ''
+    favourite : '',
+    favour: ''
 }
 
-const reducer = (state = initialstate,action) => {
+const reducer = (state = initialstate, action) => {
   switch (action.type) {
     case "SET_FAVOURITE":
-
-       
-    return{
+         return{
         ...state,
         favourite:action.payload
     }
@@ -17,7 +16,7 @@ const reducer = (state = initialstate,action) => {
      
  
     default:
-        return;
+        return state;
  }
 
 }

@@ -6,11 +6,14 @@ import { LuPlus } from "react-icons/lu";
 import { MdArrowOutward } from "react-icons/md";
 import { PiTelevisionDuotone } from "react-icons/pi";
 import { CiViewList } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { setFAV } from "../action";
 const Ex = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [query, setQuery] = useState('');
-
+    const dispatch = useDispatch()
+   const favourite = useSelector((state) => state.favourite)
     const handleSearch = async () => {
        
         console.log('Search triggered with query:', query);
@@ -28,7 +31,12 @@ const Ex = () => {
             setLoading(false);
           };
     };
-  
+ 
+   const addtofav = (movie) => {
+dispatch(setFAV(movie))
+console.log("added", movie)
+
+   }
     return(
       
       <div className="container-fluid  ">
@@ -50,7 +58,7 @@ const Ex = () => {
         <div class="content">
             <p>Your content goes here.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            
+            {favourite && <p>{favourite}</p>}
         </div>
     </div>
 
@@ -87,7 +95,7 @@ const Ex = () => {
             </button>
           </div>
           <div className="d-flex justify-content-between ">
-            <button className="sec-butto text-styl" style={{ width: "50%", margin: "10px" }}>
+            <button className="sec-butto text-styl" onClick={()=> addtofav(movie.title)} style={{ width: "50%", margin: "10px" }}>
               <LuPlus /> Add to favourite
             </button>
             <button className="sec-butto text-styl" style={{ width: "50%", margin: "10px" }}>
