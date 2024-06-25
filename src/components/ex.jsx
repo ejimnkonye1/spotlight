@@ -8,12 +8,16 @@ import { PiTelevisionDuotone } from "react-icons/pi";
 import { CiViewList } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { setFAV } from "../action";
+import { IoIosArrowForward } from "react-icons/io";
+
 const Ex = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [query, setQuery] = useState('');
+    
     const dispatch = useDispatch()
    const favourite = useSelector((state) => state.favourite)
+   
     const handleSearch = async () => {
        
         console.log('Search triggered with query:', query);
@@ -31,6 +35,7 @@ const Ex = () => {
             setLoading(false);
           };
     };
+    const count = a += 1
  
    const addtofav = (movie) => {
 dispatch(setFAV(movie))
@@ -59,8 +64,36 @@ console.log("added", movie)
            
             <ul class="list-group">
         {favourite.map((favMovie, index) => (
-          <li className="list-group-item list-group-item-primary"
-           key={index}>{favMovie.title}</li>
+          <div>
+
+           
+           <li key={index} className="list-group-item list-group-item-primary custom-background" 
+    style={{ 
+        backgroundImage: `url(https://image.tmdb.org/t/p/w200${favMovie.poster_path})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        height: '50px', 
+        width: '100%', 
+        borderRadius: '10px', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        padding: '10px', 
+        color: 'white' // Ensures text is visible over the background image
+    }}>
+    <div>
+        <div style={{ fontWeight: 'bold' }}>{favMovie.title}</div>
+        <div>count</div>
+    </div>
+    <div>
+    <IoIosArrowForward />
+   
+    </div>
+</li>
+
+          
+          </div>
+         
         ))}
       </ul>
 
