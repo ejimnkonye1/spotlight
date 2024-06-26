@@ -7,18 +7,37 @@ import { MdArrowOutward } from "react-icons/md";
 import { PiTelevisionDuotone } from "react-icons/pi";
 import { CiViewList } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
-import { setFAV } from "../action";
+import { setFAV, setListName } from "../action";
 import { IoIosArrowForward } from "react-icons/io";
 
 const Ex = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [query, setQuery] = useState('');
-    const [count , setCount] = useState('')
+    const [count , setCount] = useState(0)
+    const [list, setList] = useState([])
+    const [showMainModal, setShowMainModal] = useState(false);
+    const [showNestedModal, setShowNestedModal] = useState(false);
 
+    const handleShowMainModal = () => setShowMainModal(true);
+    const handleCloseMainModal = () => setShowMainModal(false);
+
+    const handleShowNestedModal = () => {
+        setShowNestedModal(true);
+        setShowMainModal(false); // Close the main modal when opening nested modal
+    };
+
+    const handleCloseNestedModal = () => {
+        setShowNestedModal(false);
+        // setShowMainModal(true); // Reopen the main modal when closing nested modal
+    };
+  const incresea = () => {
+    setCount(count + 1)
+    console.log("this is", count)
+  }
     const dispatch = useDispatch()
    const favourite = useSelector((state) => state.favourite)
-   
+   const mylist = useSelector((state) => state.listName)
     const handleSearch = async () => {
        
         console.log('Search triggered with query:', query);
@@ -38,11 +57,22 @@ const Ex = () => {
     };
     
  
-   const addtofav = (movie) => {
-dispatch(setFAV(movie))
-console.log("added", movie)
+    const addtofav = (movie, list) => {
+      if (list) {
+          dispatch(setFAV(movie));
+          console.log("added", movie);
+          console.log("Adding", movie, "to list", list);
+          console.log("my list", list);
+      }
+  }
 
-   }
+  const handleListChange = (e, index) => {
+      const value = e.target.value;
+      
+      setList(value);
+      // You can dispatch an action to update the list name in Redux state if needed
+      console.log('list name', value);
+  }
     return(
       
       <div className="container-fluid  ">
@@ -84,7 +114,7 @@ console.log("added", movie)
     }}>
     <div>
         <div style={{ fontWeight: 'bold' }}>{favMovie.title}</div>
-        <div>count</div>
+        <div>{list}</div>
     </div>
     <div>
     <IoIosArrowForward />
@@ -98,8 +128,7 @@ console.log("added", movie)
         ))}
       </ul>
 
-           
-
+     
         </div>
     </div>
 
@@ -124,11 +153,61 @@ console.log("added", movie)
           height="500px"
         />
       </Link>
+      <div className="container">
+            {/* Main Modal */}
+            <div className={`modal fade ${showMainModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showMainModal ? 'block' : 'none' }}>
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Main Modal title</h5>
+                            <button type="button" className="close" onClick={handleCloseMainModal}>
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <a href="#" onClick={handleShowNestedModal}>Open Nested Modal</a>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary">Add to list</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Nested Modal */}
+            <div className={`modal fade ${showNestedModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showNestedModal ? 'block' : 'none' }}>
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Nested Modal title</h5>
+                            <button type="button" className="close" onClick={handleCloseNestedModal}>
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                          
+                        <input
+                                type="text"
+                                value={list}
+                                onChange={handleListChange}
+                                placeholder="Enter List Name"
+                            />
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" onClick={handleCloseNestedModal}>Close</button>
+                            <button type="button" className="btn btn-primary" onClick={() => addtofav (movie, list)}>add to list</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       <div className="p-3 d-flex flex-column justify-content-between">
         <div>
           <h6 className="search-title">{movie.title}</h6>
           <p className="search-overview">{movie.overview}</p>
         </div>
+
         <div className="more-se">
           <div className="big-button-more">
             <button className="blue-butto">
@@ -136,10 +215,10 @@ console.log("added", movie)
             </button>
           </div>
           <div className="d-flex justify-content-between ">
-            <button className="sec-butto text-styl" onClick={()=> addtofav(movie)} style={{ width: "50%", margin: "10px" }}>
+            <button className="sec-butto text-styl" onClick={handleShowMainModal} style={{ width: "50%", margin: "10px" }}>
               <LuPlus /> Add to favourite
             </button>
-            <button className="sec-butto text-styl" style={{ width: "50%", margin: "10px" }}>
+            <button className="sec-butto text-styl" onClick={incresea} style={{ width: "50%", margin: "10px" }}>
               <PiTelevisionDuotone /> Watch now
             </button>
           </div>

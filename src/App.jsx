@@ -7,6 +7,7 @@ import { Top10 } from './components/home'
 import { Moviedetails } from './components/details'
 import { Search } from './components/test'
 import Ex from './components/ex'
+import YourComponent from './components/me'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,7 +19,7 @@ function App() {
         <Route path='/' element={<Top10 />} />
         <Route path='/movies/:id' element={<Moviedetails />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/eg' element={<Ex />} />
+        <Route path='/eg' element={<YourComponent/>} />
       </Routes>
     </Router>
   </div>
