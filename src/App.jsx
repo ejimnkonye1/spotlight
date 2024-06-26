@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={<Top10 />} />
         <Route path='/movies/:id' element={<Moviedetails />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/eg' element={<YourComponent/>} />
+        <Route path='/eg' element={<Ex/>} />
       </Routes>
     </Router>
   </div>

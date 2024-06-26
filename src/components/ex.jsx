@@ -9,6 +9,8 @@ import { CiViewList } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { setFAV, setListName } from "../action";
 import { IoIosArrowForward } from "react-icons/io";
+import { Modal } from "./modal";
+import { Searchbar } from "./search";
 
 const Ex = () => {
     const [searchResults, setSearchResults] = useState([]);
@@ -61,7 +63,7 @@ const Ex = () => {
       if (list) {
           dispatch(setFAV(movie));
           console.log("added", movie);
-          console.log("Adding", movie, "to list", list);
+          console.log("Adding", movie, "to list", listName);
           console.log("my list", list);
       }
   }
@@ -75,25 +77,21 @@ const Ex = () => {
   }
     return(
       
-      <div className="container-fluid  ">
-        <div className="row">
-          <div className="col-md-12">
-    <div className="" id="chat3">
-          <div className="">
+ <div className="container-fluid  ">
+  <div className="row">
+  <div className="col-md-12">
+  <div className="" id="chat3">
+    <div className="">
      <div className="row">
-
-                <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0 ">
-        <div className="user ">
-                     
-                      <div class="list border-bottom  p-4 ">
-                      <CiViewList size={40} className="viewl" /> <span>Your list</span>
+     <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0 ">
+       <div className="user ">
+       <div class="list border-bottom  p-4 ">
+       <CiViewList size={40} className="viewl" /> <span>Your list</span>
     </div>
-    
-                      <div className="user-list" >
-                      <div class="container mt-3">
+     <div className="user-list" >
+       <div class="container mt-3">
         <div class="content">
-           
-            <ul class="list-group">
+          <ul class="list-group">
         {favourite.map((favMovie, index) => (
           <div>
 
@@ -114,7 +112,7 @@ const Ex = () => {
     }}>
     <div>
         <div style={{ fontWeight: 'bold' }}>{favMovie.title}</div>
-        <div>{list}</div>
+        <div>{mylist}</div>
     </div>
     <div>
     <IoIosArrowForward />
@@ -127,20 +125,24 @@ const Ex = () => {
          
         ))}
       </ul>
-
-     
-        </div>
+      </div>
     </div>
-
-                      </div>
-                      <div class=" p-2 mt-5 content-bottom  border-top">
-                        {/* <div className="bor-bot"></div> */}
-        <p class="text-center mb-0">Footer content</p>
+   </div>
+      <div class=" p-2 mt-5 content-bottom  border-top">
+      <p class="text-center mb-0">Footer content</p>
     </div>
-                    </div>
-                  </div>
+  </div>
+          </div>
 
   <div className="col-md-6 col-lg-7 col-xl-9 cl card " >
+    <Modal showMainModal={showMainModal}
+     handleCloseMainModal={handleCloseMainModal}
+     setShowMainModal={setShowMainModal}
+     addtofav={addtofav}
+    //  movie={movie}
+     list={list}
+     handleListChange={handleListChange}
+     />
   <div className="search-results">
   {searchResults.map((movie) => (
     <div key={movie.id} className="d-flex search-item">
@@ -153,55 +155,7 @@ const Ex = () => {
           height="500px"
         />
       </Link>
-      <div className="container">
-            {/* Main Modal */}
-            <div className={`modal fade ${showMainModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showMainModal ? 'block' : 'none' }}>
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Main Modal title</h5>
-                            <button type="button" className="close" onClick={handleCloseMainModal}>
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <a href="#" onClick={handleShowNestedModal}>Open Nested Modal</a>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary">Add to list</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Nested Modal */}
-            <div className={`modal fade ${showNestedModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showNestedModal ? 'block' : 'none' }}>
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Nested Modal title</h5>
-                            <button type="button" className="close" onClick={handleCloseNestedModal}>
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                          
-                        <input
-                                type="text"
-                                value={list}
-                                onChange={handleListChange}
-                                placeholder="Enter List Name"
-                            />
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={handleCloseNestedModal}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={() => addtofav (movie, list)}>add to list</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+     
       <div className="p-3 d-flex flex-column justify-content-between">
         <div>
           <h6 className="search-title">{movie.title}</h6>
@@ -228,25 +182,10 @@ const Ex = () => {
   ))}
 </div>
 
-                <nav className="navbar bg-body-tertiary">
-                <div className="container-fluid search-input">
-
-                        <input
-                            className="form-control me-2 search mt-auto "
-                            type="search"
-                            placeholder="Search"
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                  handleSearch(e);
-                                }
-                              }}
-                        />
-       
-                   
-                </div>
-            </nav>
+             <Searchbar
+              setQuery={setQuery} 
+              handleSearch={handleSearch} 
+              query={query} />
        </div>
 
   
