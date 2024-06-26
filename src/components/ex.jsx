@@ -7,6 +7,9 @@ import { Modal } from "./modal";
 import { Searchbar } from "./search";
 import { Searchresult } from "./searchresult";
 import { CiViewList } from "react-icons/ci";
+import { Link } from "react-router-dom";
+import { Listdet } from "./listdet";
+
 const Ex = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,10 +19,14 @@ const Ex = () => {
   const [displaylist, setDisplaylist] = useState([]);
   const [showMainModal, setShowMainModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-
+  const [showlistpage, setshowlistpage] = useState(false)
+  const [listNameCounter, setListNameCounter] = useState(1);
   const dispatch = useDispatch();
   const favourite = useSelector((state) => state.favourite);
   const mylist = useSelector((state) => state.listName);
+  const [newListName, setNewListName] = useState('');
+  const [selectedList, setSelectedList] = useState(null);
+
 
   const handleSearch = async () => {
     console.log('Search triggered with query:', query);
@@ -43,33 +50,28 @@ const Ex = () => {
     console.log('list name', value);
     
   };
-  // const addtofav = (e, movie, list) => {
-  //   if (list) {
-  //     dispatch(setFAV(movie));
-  //     console.log("added", movie);
-  //     // console.log("Adding", movie, "to list", listName);
-  //     // console.log("my list", list);
-      
-  //       setDisplaylist([...displaylist,list]);
-  //       setList('')
-      
+  
+  const handleCreateNewList = () => {
+    if (newListName) {
+      const newList = { listName: newListName, movies: [] };
+      setDisplaylist([...displaylist, newList]);
+      setSelectedList(newList);
+      setNewListName('');
     
-  //   }
-  // };
 
-  const addtofav = (movie) => {
-    if (listName) {
-      dispatch(setFAV(movie)); // Dispatch action to add movie to favorites
-      dispatch(setList(listName)); // Dispatch action to set the current list name
-      
-      // Create a new list entry every time a movie is added
-      const newListEntry = { listName, movies: [movie] };
-      setDisplaylist([...displaylist, newListEntry]); // Update displaylist with new list and movie
-      
-      setListName(''); // Clear list name input
-      setShowMainModal(false); // Close main modal
     }
   };
+  const addtofav = (movie) => {
+    // if (selectedList) {
+      const updatedList = displaylist.map((listItem) =>
+        listItem === selectedList ? { ...listItem, movies: [...listItem.movies, movie] } : listItem
+      );
+      setDisplaylist(updatedList);
+      setShowMainModal(false);
+      setSelectedMovie(null);
+    // }
+  };
+  
   const handleShowMainModal = (movie) => {
     setSelectedMovie(movie);
     setShowMainModal(true);
@@ -79,6 +81,13 @@ const Ex = () => {
     setShowMainModal(false);
     setSelectedMovie(null);
   };
+  const handleListLinkClick = (listId) => {
+    // Handle click on list link to navigate and show Listdet
+    handleCloseMainModal(); // Close modal
+    setshowlistpage(true); // Show Listdet component
+    navigate(`/list/${listId}`); // Navigate to list details
+  };
+
 
   return (
     <div className="container-fluid">
@@ -96,40 +105,40 @@ const Ex = () => {
                       <div className="container mt-3">
                         <div className="content">
                         <ul className="list-group">
-            {favourite.map((favMovie, index) => (
-              <li key={index} className="list-group-item list-group-item-primary custom-background"
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/w200${favMovie.poster_path})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  height: '50px',
-                  width: '100%',
-                  borderRadius: '10px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '10px',
-                  color: 'white'
-                }}>
-                <div>
-                  <div style={{ fontWeight: 'bold' }}>{favMovie.title}</div>
-                  <div className="text-danger">
-                    {displaylist
-                      .filter((listItem) => listItem.movies.includes(favMovie))
-                      .map((filteredItem, idx) => (
-                        <div key={idx}>
-                          <p>List Name: {filteredItem.listName}</p>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-                <div>
-                  <IoIosArrowForward />
-                </div>
-              </li>
-            ))}
-          </ul>
-                          
+                            {displaylist.map((listItem, idx) => (
+                              <li key={idx} className="list-group-item list-group-item-primary custom-background"
+                              
+                              >
+                                <div>
+                                  <div style={{ fontWeight: 'bold' }}>{listItem.listName}</div>
+                                  <div className="text-danger">
+                                    {listItem.movies.map((movie, index) => (
+                                      <div key={index}>
+                                        {/* <Link to={`/list/${movie.id}`}> */}
+                                        <p onClick={handleListLinkClick}
+                                        style={{
+                                          backgroundImage: `url(https://image.tmdb.org/t/p/w200${movie.poster_path})`,
+                                          backgroundSize: 'cover',
+                                          backgroundPosition: 'center',
+                                          height: '50px',
+                                          width: '100%',
+                                          borderRadius: '10px',
+                                          display: 'flex',
+                                          justifyContent: 'space-between',
+                                          alignItems: 'center',
+                                          padding: '10px',
+                                          color: 'white'
+                                        }}
+                                        >{movie.title}</p>
+                                        {/* </Link> */}
+                                       
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -139,16 +148,29 @@ const Ex = () => {
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-7 col-xl-9 cl card">
-                  {showMainModal && (
-                    <Modal
-                      showMainModal={showMainModal}
-                      handleCloseMainModal={handleCloseMainModal}
-                      setShowMainModal={setShowMainModal}
-                      addtofav={addtofav}
-                      movie={selectedMovie}
-                      listName={listName}
-                      handleListChange={handleListChange}
-                    />
+                  <div>
+     
+               {showlistpage ? (
+                   <div>
+                  <Listdet />
+
+                   </div>
+                    ):(
+                    <div>
+                      {showMainModal && (
+                   <Modal
+                   showMainModal={showMainModal}
+                   handleCloseMainModal={handleCloseMainModal}
+                   setShowMainModal={setShowMainModal}
+                   addtofav={addtofav}
+                   movie={selectedMovie}
+                   newListName={newListName}
+                   setNewListName={setNewListName}
+                   handleCreateNewList={handleCreateNewList}
+                   selectedList={selectedList}
+                   setSelectedList={setSelectedList}
+                   displaylist={displaylist}
+                 />
                   )}
                   <div className="search-results">
                     <Searchresult searchResults={searchResults} handleShowMainModal={handleShowMainModal} />
@@ -158,6 +180,12 @@ const Ex = () => {
                     handleSearch={handleSearch}
                     query={query}
                   />
+                    </div>
+                    )}
+                  
+                  </div>
+                 
+
                 </div>
               </div>
             </div>

@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-export const Modal = ({ showMainModal, handleCloseMainModal, setShowMainModal, listName, addtofav, handleListChange, movie }) => {
+export const Modal = ({ showMainModal,
+  handleCloseMainModal,
+  setShowMainModal,
+  addtofav,
+  movie,
+  newListName,
+  setNewListName,
+  displaylist,
+  handleCreateNewList,
+  selectedList,
+  setSelectedList, }) => {
   const [showNestedModal, setShowNestedModal] = useState(false);
 
   const handleShowNestedModal = () => {
@@ -18,7 +28,11 @@ export const Modal = ({ showMainModal, handleCloseMainModal, setShowMainModal, l
     // If needed, setShowMainModal(true); // Reopen the main modal when closing nested modal
   };
   
-
+const createlist = () => {
+    addtofav(movie)
+    handleCreateNewList()
+    
+}
   const handleAddToFav = () => {
     addtofav(movie, listName);
   };
@@ -52,16 +66,31 @@ export const Modal = ({ showMainModal, handleCloseMainModal, setShowMainModal, l
               </button>
             </div>
             <div className="modal-body">
-              <input
-                type="text"
-                value={listName}
-                onChange={handleListChange}
-                placeholder="Enter List Name"
-              />
+            <input
+        type="text"
+        value={newListName}
+        onChange={(e) => setNewListName(e.target.value)}
+        placeholder="Enter a new list name"
+      />
+            <button onClick={createlist}>Create new list</button>
+            <ul>
+        {displaylist.map((listItem, index) => (
+          <li key={index}>
+            <input
+              type="radio"
+              name="selectedList"
+              value={listItem.listName}
+              checked={selectedList === listItem}
+              onChange={() => setSelectedList(listItem) }
+            />
+            {listItem.listName}
+          </li>
+        ))}
+      </ul>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={handleCloseNestedModal}>Close</button>
-              <button type="button" className="btn btn-primary" onClick={handleAddToFav}>Add to list</button>
+            <button onClick={() => addtofav(movie)}>Add to selected list</button>
+            <button onClick={handleCloseMainModal}>Close</button>
             </div>
           </div>
         </div>
