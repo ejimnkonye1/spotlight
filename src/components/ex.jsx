@@ -9,7 +9,7 @@ import { Searchresult } from "./searchresult";
 import { CiViewList } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { Listdet } from "./listdet";
-
+import { useNavigate } from "react-router-dom";
 const Ex = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const Ex = () => {
   const mylist = useSelector((state) => state.listName);
   const [newListName, setNewListName] = useState('');
   const [selectedList, setSelectedList] = useState(null);
-
+const navigate = useNavigate()
 
   const handleSearch = async () => {
     console.log('Search triggered with query:', query);
@@ -152,7 +152,8 @@ const Ex = () => {
      
                {showlistpage ? (
                    <div>
-                  <Listdet />
+                  <Listdet 
+                  setshowlistpage={setshowlistpage}/>
 
                    </div>
                     ):(
