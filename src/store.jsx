@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 const initialstate = {
     favourite : [],
-    listName: ''
+    listName: []
 }
 
 const reducer = (state = initialstate, action) => {
@@ -15,7 +15,7 @@ const reducer = (state = initialstate, action) => {
         case "SET_LIST":
             return{
                 ...state,
-                listName: action.payload
+                listName: [...state.listName,action.payload]
             }
      
  

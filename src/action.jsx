@@ -3,7 +3,7 @@ export const setFAV = (fav) => ({
     payload:fav
 })
 
-export const setListName = (list) => ({
+export const setList = (list) => ({
     type: "SET_LIST",
     payload:list
 })
