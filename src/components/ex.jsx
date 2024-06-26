@@ -85,7 +85,7 @@ const navigate = useNavigate()
     // Handle click on list link to navigate and show Listdet
     handleCloseMainModal(); // Close modal
     setshowlistpage(true); // Show Listdet component
-    navigate(`/list/${listId}`); // Navigate to list details
+    // navigate(`/list/${listId}`); // Navigate to list details
   };
 
 
@@ -153,7 +153,8 @@ const navigate = useNavigate()
                {showlistpage ? (
                    <div>
                   <Listdet 
-                  setshowlistpage={setshowlistpage}/>
+                  setshowlistpage={setshowlistpage}
+                  displaylist={displaylist}/>
 
                    </div>
                     ):(
