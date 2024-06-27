@@ -51,25 +51,35 @@ const navigate = useNavigate()
     
   };
   
-  const handleCreateNewList = () => {
+  const handleCreateNewList = (movie) => {
     if (newListName) {
-      const newList = { listName: newListName, movies: [] };
+      // Create a new list with the movie included
+      const newList = { listName: newListName, movies: [movie] };
+      
+      // Add the new list to the display list
       setDisplaylist([...displaylist, newList]);
+      
+      // Set the newly created list as the selected list
       setSelectedList(newList);
+      
+      // Clear the new list name input field
       setNewListName('');
-    
-
+      
+      // Close the main modal and clear the selected movie (if necessary)
+      setShowMainModal(false);
+      setSelectedMovie(null);
     }
   };
+  
   const addtofav = (movie) => {
-    // if (selectedList) {
+    if (selectedList) {
       const updatedList = displaylist.map((listItem) =>
         listItem === selectedList ? { ...listItem, movies: [...listItem.movies, movie] } : listItem
       );
       setDisplaylist(updatedList);
       setShowMainModal(false);
       setSelectedMovie(null);
-    // }
+    }
   };
   
   const handleShowMainModal = (movie) => {
@@ -81,12 +91,21 @@ const navigate = useNavigate()
     setShowMainModal(false);
     setSelectedMovie(null);
   };
-  const handleListLinkClick = (listId) => {
+  // State to keep track of the selected list index
+const [selectedListIndex, setSelectedListIndex] = useState(0);
+
+
+  const handleListLinkClick = (index) => {
     // Handle click on list link to navigate and show Listdet
     handleCloseMainModal(); // Close modal
     setshowlistpage(true); // Show Listdet component
-    // navigate(`/list/${listId}`); // Navigate to list details
+    setSelectedListIndex(index);
+
   };
+
+
+// Get the selected list based on selectedListIndex
+const selectedListitem = displaylist[selectedListIndex];
 
 
   return (
@@ -105,40 +124,35 @@ const navigate = useNavigate()
                       <div className="container mt-3">
                         <div className="content">
                         <ul className="list-group">
-                            {displaylist.map((listItem, idx) => (
-                              <li key={idx} className="list-group-item list-group-item-primary custom-background"
-                              
-                              >
-                                <div>
-                                  <div style={{ fontWeight: 'bold' }}>{listItem.listName}</div>
-                                  <div className="text-danger">
-                                    {listItem.movies.map((movie, index) => (
-                                      <div key={index}>
-                                        {/* <Link to={`/list/${movie.id}`}> */}
-                                        <p onClick={handleListLinkClick}
-                                        style={{
-                                          backgroundImage: `url(https://image.tmdb.org/t/p/w200${movie.poster_path})`,
-                                          backgroundSize: 'cover',
-                                          backgroundPosition: 'center',
-                                          height: '50px',
-                                          width: '100%',
-                                          borderRadius: '10px',
-                                          display: 'flex',
-                                          justifyContent: 'space-between',
-                                          alignItems: 'center',
-                                          padding: '10px',
-                                          color: 'white'
-                                        }}
-                                        >{movie.title}</p>
-                                        {/* </Link> */}
-                                       
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
+  {displaylist.map((listItem, idx) => (
+    <li  
+      key={idx}
+    className={`list-group-item list-group-item-primary custom-background
+      
+      ${selectedListIndex === idx}`}
+      onClick={() => handleListLinkClick(idx)}
+      
+      style={{
+        backgroundImage: listItem.movies.length > 0 ? `url(https://image.tmdb.org/t/p/w200${listItem.movies[0].poster_path})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        borderRadius: '10px',
+        color: 'white',
+        padding: '10px'
+      }}
+    >
+      <div style={{ fontWeight: 'bold', }}>
+        {listItem.listName}
+      </div>
+      <div className="text-danger" style={{ marginTop: '10px' }}>
+        {listItem.movies.length} {listItem.movies.length === 1 ? 'movie' : 'movies'}
+      </div>
+    </li>
+  ))}
+</ul>
+
+
+
                         </div>
                       </div>
                     </div>
@@ -154,8 +168,10 @@ const navigate = useNavigate()
                    <div>
                   <Listdet 
                   setshowlistpage={setshowlistpage}
-                  displaylist={displaylist}/>
-
+                  displaylist={displaylist}
+                  selectedListitem={selectedListitem}
+                  />
+                   
                    </div>
                     ):(
                     <div>

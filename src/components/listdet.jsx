@@ -5,113 +5,60 @@ import { MdArrowBackIos } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-export const Listdet = ({setshowlistpage,displaylist}) => {
-    const { id } = useParams();
-    const [movie, setMovie] = useState(null);
-    const back = () => {
-    setshowlistpage(false)
-    }
+export const Listdet = ({ setshowlistpage, displaylist, selectedListitem }) => {
+  const back = () => {
+    setshowlistpage(false);
+  };
 
-    // useEffect(()=>{
-    //     const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
-    //     const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
-    //     axios
-    //     .get(movieUrl)
-    //     .then((response) => {
-    //       setMovie(response.data);
-         
-    //   }) .catch((error) => {
-    //     console.error('Error fetching list details:', error);
-        
-    //   });
-    // }, [id])
+  // State to keep track of the selected list index
+  const [selectedListIndex, setSelectedListIndex] = useState(0);
 
-    // if (!movie) {
-    //     return <p>Movie not found.</p>;
-    //   }
-    return(
+  // Function to handle selecting a different list
+  const selectList = (index) => {
+    setSelectedListIndex(index);
+  };
 
-        <div>
-         <nav class="navbar ">
-        <div class="container">
-          <div className='icon-head'>
-              
-          <MdArrowBackIos className=''style={{cursor:'pointer'}} onClick={back} />
-         
+  // Get the selected list based on selectedListIndex
+  const selectedList = displaylist[selectedListIndex];
+
+  return (
+    <div>
+      <nav className="navbar">
+        <div className="container d-flex justify-content-between align-items-center">
+          <div className="icon-head">
+            <MdArrowBackIos style={{ cursor: 'pointer' }} onClick={back} />
           </div>
-        
-         <div className='d-flex'>
-         <div className="icon-head m-2" >
-                  <AiFillDelete className='plus-icon' />
-                </div>
-                
-         </div>
-         
-      
+          <div className="list-item">
+            <h4>{selectedListitem?.listName} ({selectedListitem?.movies.length})</h4>
+          </div>
+          <div className="icon-head m-2">
+            <AiFillDelete className="plus-icon" />
+          </div>
         </div>
       </nav>
 
-      {/* <div className='related-movies-container ' style={{ overflowX: 'auto', width: "%" }}>
-        <h6 className='subheading-2'>list Movies</h6>
-        <div className='d-flex flex-row'>
-          {movie.map((movie) => (
-            <div key={movie.id} className='mb-4 m-2'>
-              <div className='' style={{width:"100%"}}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  className='img-fluid img-det'
-                  alt={relatedMovie.title}
-                  style={{
-                    width: "150px",
-                    height: "225px",
-                    
-                    // objectFit: "cover"
-                  }}
-                />
-                <div className='card-body p-0'>
-                  <h6 className='card-title text-center mt-2'>{movie.title}</h6>
+      <div className="container mt-4">
+        {selectedListitem && (
+          <div className="row">
+            {selectedListitem.movies.map((movie, index) => (
+              <div key={index} className="col-md-4 mb-4">
+                <div className="card">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                    className="card-img-top"
+                    alt={movie.title}
+                    width="100%"
+                    height="auto"
+                  />
+                  <div className="card-body">
+                    <p className="card-text">{movie.title}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </div> */}
-
-<ul className="list-group">
-                            {displaylist.map((listItem, idx) => (
-                              <li key={idx} className="list-group-item list-group-item-primary custom-background"
-                              
-                              >
-                                <div>
-                                  <div style={{ fontWeight: 'bold' }}>{listItem.listName}</div>
-                                  <div className="text-danger">
-                                    {listItem.movies.map((movie, index) => (
-                                      <div key={index}>
-                                        {/* <Link to={`/list/${movie.id}`}> */}
-                                        <p 
-                                        style={{
-                                          backgroundImage: `url(https://image.tmdb.org/t/p/w200${movie.poster_path})`,
-                                          backgroundSize: 'cover',
-                                          backgroundPosition: 'center',
-                                          height: '50px',
-                                          width: '100%',
-                                          borderRadius: '10px',
-                                          display: 'flex',
-                                          justifyContent: 'space-between',
-                                          alignItems: 'center',
-                                          padding: '10px',
-                                          color: 'white'
-                                        }}
-                                        >{movie.title}</p>
-                                        {/* </Link> */}
-                                       
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-        </div>
-    )
-}
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

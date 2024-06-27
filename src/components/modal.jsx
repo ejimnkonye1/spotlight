@@ -28,9 +28,9 @@ export const Modal = ({ showMainModal,
     // If needed, setShowMainModal(true); // Reopen the main modal when closing nested modal
   };
   
-const createlist = () => {
+const createlist = (movie) => {
     addtofav(movie)
-    handleCreateNewList()
+    handleCreateNewList(movie)
     
 }
   const handleAddToFav = () => {
@@ -72,7 +72,7 @@ const createlist = () => {
         onChange={(e) => setNewListName(e.target.value)}
         placeholder="Enter a new list name"
       />
-            <button onClick={createlist}>Create new list</button>
+            <button onClick={() => createlist(movie)}>Create new list</button>
             <ul>
         {displaylist.map((listItem, index) => (
           <li key={index}>
