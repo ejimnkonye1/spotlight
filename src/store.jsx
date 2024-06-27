@@ -1,23 +1,26 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 const initialstate = {
-    favourite : ''
+    favourite : [],
+    listName: []
 }
 
-const reducer = (state = initialstate,action) => {
+const reducer = (state = initialstate, action) => {
   switch (action.type) {
     case "SET_FAVOURITE":
-
-       
-    return{
+         return{
         ...state,
-        favourite:action.payload
+        favourite: [...state.favourite, action.payload],//made array 
     }
-        
+        case "SET_LIST":
+            return{
+                ...state,
+                listName: [...state.listName,action.payload]
+            }
      
  
     default:
-        return;
+        return state;
  }
 
 }
