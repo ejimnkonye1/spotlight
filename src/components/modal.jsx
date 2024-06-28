@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-
+import { CiViewList } from "react-icons/ci";
+import { TiDeleteOutline } from "react-icons/ti";
+import { FiPlus } from "react-icons/fi";
+import { LuFilePlus2 } from "react-icons/lu";
 export const Modal = ({ showMainModal,
   handleCloseMainModal,
   setShowMainModal,
@@ -15,10 +17,11 @@ export const Modal = ({ showMainModal,
   const [showNestedModal, setShowNestedModal] = useState(false);
 
   const handleShowNestedModal = () => {
-    setShowMainModal(true); 
+  
     console.log("Opening nested modal");
     setShowNestedModal(true);
-  // Ensure this is correctly managing state
+    
+  
   };
   
   const handleCloseNestedModal = () => {
@@ -37,65 +40,89 @@ const createlist = (movie) => {
     addtofav(movie, listName);
   };
 
-  return ReactDOM.createPortal(
+  return (
     <>
-      <div className={`modal fade ${showMainModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showMainModal ? 'block' : 'none' }}>
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Main Modal title</h5>
-              <button type="button" className="close" onClick={handleCloseMainModal}>
-                <span>&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <p onClick={handleShowNestedModal}>Open Nested Modal</p>
-              <p>{movie?.title}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    {showNestedModal? (
       <div className={`modal fade ${showNestedModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showNestedModal ? 'block' : 'none' }}>
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Nested Modal title</h5>
-              <button type="button" className="close" onClick={handleCloseNestedModal}>
-                <span>&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-            <input
-        type="text"
-        value={newListName}
-        onChange={(e) => setNewListName(e.target.value)}
-        placeholder="Enter a new list name"
-      />
-            <button onClick={() => createlist(movie)}>Create new list</button>
+  <div className="modal-dialog modal-dialog-centered" role="document">
+    <div className="modal-content" style={{
+      width:'70%'
+    }}>
+      <div className="modal-header">
+      <LuFilePlus2  className="list-icon" /> 
+  <div className="modal-title d-flex flex-column">
+  <span className="add">New List</span>
+
+</div>
+        <TiDeleteOutline className="cancel" onClick={handleCloseNestedModal} />
+      </div>
+      <div className="modal-body" >
+      <label htmlFor="list" className="li">List Name</label>
+<input
+  type="text"
+  name="list"
+  value={newListName}
+  onChange={(e) => setNewListName(e.target.value)}
+  className="form-control"
+  placeholder="Enter a new list name"
+  
+/>
+      </div>
+      <div className="modal-footer">
+        <button className="btn btn-primary" onClick={() => createlist(movie)}>Create new list</button>
+      </div>
+    </div>
+  </div>
+</div>
+    ): (
+      <div className={`modal fade ${showMainModal ? 'show' : ''}`} tabIndex="-1" role="dialog" 
+      style={{ display: showMainModal ? 'block' : 'none' }}>
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content" style={{width:'80%'}}>
+        <div className="modal-header">
+  <CiViewList className="list-icon" /> 
+  <div className="modal-title d-flex flex-column">
+  <span className="add">Add to list</span>
+  <span className="please">Please select a list to add movie to</span>
+</div>
+
+  
+  <div className="d-flex justify-content-end ">
+    <TiDeleteOutline className="cancel" onClick={handleCloseMainModal} />
+  </div>
+</div>
+          <div className="modal-body">
+
             <ul>
-        {displaylist.map((listItem, index) => (
-          <li key={index}>
-            <input
-              type="radio"
-              name="selectedList"
-              value={listItem.listName}
-              checked={selectedList === listItem}
-              onChange={() => setSelectedList(listItem) }
-            />
-            {listItem.listName}
-          </li>
-        ))}
-      </ul>
-            </div>
-            <div className="modal-footer">
-            <button onClick={() => addtofav(movie)}>Add to selected list</button>
-            <button onClick={handleCloseMainModal}>Close</button>
-            </div>
+              {displaylist.map((listItem, index) => (
+                <li key={index}>
+                  <label>
+                    <input
+                      type="radio"
+                      name="selectedList"
+                      value={listItem.listName}
+                      checked={selectedList === listItem}
+                      onChange={() => setSelectedList(listItem)}
+                    />
+                    {listItem.listName}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          
+            <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={handleShowNestedModal}> <FiPlus style={{textDecoration:'underline'}} /> new list</a>
+          </div>
+          <div className="modal-footer">
+            <button className="btn btn-primary add-b" onClick={() => addtofav(movie)}>Add to this list</button>
           </div>
         </div>
       </div>
-    </>,
-    document.body
+    </div>
+    )}
+    
+
+
+
+    </>
   );
 };

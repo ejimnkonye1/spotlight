@@ -32,26 +32,32 @@ export const Listdet = ({ setshowlistpage, displaylist, selectedListitem }) => {
             <h4>{selectedListitem?.listName} ({selectedListitem?.movies.length})</h4>
           </div>
           <div className="icon-head m-2">
-            <AiFillDelete className="plus-icon" />
+            <AiFillDelete className="plus-icon text-danger" />
           </div>
         </div>
       </nav>
 
-      <div className="container mt-4">
+      <div className="container mt-4 list-results">
         {selectedListitem && (
           <div className="row">
             {selectedListitem.movies.map((movie, index) => (
               <div key={index} className="col-md-4 mb-4">
-                <div className="card">
+                <div className="card rounded" style={{width:'70%'}}>
                   <img
                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                     className="card-img-top"
                     alt={movie.title}
                     width="100%"
-                    height="auto"
+                    
+                    height="200px"
                   />
                   <div className="card-body">
-                    <p className="card-text">{movie.title}</p>
+                    <div className="d-flex justify-content-between">
+                    <p className="card-text text-secondary">{movie.title}</p>
+                    <p className="card-text text-danger">Delete</p>
+                      </div>
+                    
+
                   </div>
                 </div>
               </div>
