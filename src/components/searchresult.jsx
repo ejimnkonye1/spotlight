@@ -29,7 +29,8 @@ export const Searchresult = ({ searchResults, handleShowMainModal, query }) => {
          
         <div key={movie.id} className="search-item ">
           
-        <Link to={`/movies/${movie.id}`}>
+          <Link to={`/movies/${movie.id}`}>
+        <div className="image-container">
           <img
             src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
             alt={movie.title}
@@ -37,7 +38,9 @@ export const Searchresult = ({ searchResults, handleShowMainModal, query }) => {
             width="400px"
             height="500px"
           />
-        </Link>
+          <div className="percentage-circle">70%</div>
+        </div>
+      </Link>
         <div className="p-3 d-flex flex-column justify-content-between">
           <div>
             <h6 className="search-title">{movie.title}</h6>

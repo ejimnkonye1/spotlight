@@ -109,7 +109,7 @@ height: 100vh;
     width: 200px;
  }
  .user{
-    margin: -11px;
+    /* margin: -11px; */
     
     height: 100vh !important;
  }
@@ -205,4 +205,50 @@ padding: 2px;
   height: 30px;
   color: #fff;
   padding: 5px;
+}
+/* percent */
+.image-container {
+  position: relative;
+  /* width: 400px;
+  height: 500px; */
+}
+.percentage-circle {
+  position: absolute;
+  top: -20px;
+  right: 10px;
+  width: 2.5rem;
+  height: 40px;
+  border-radius: 10%;
+  font-family: clashG;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  color: #0c9733;
+  background: #E9F6FF;
+  box-shadow: 0 4px 4px #00000091;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.list{
+  display: flex;
+}
+.viewl{
+  background-color: #92c3e6;
+  width: 30px;
+  height: 30px;
+   border-radius: 10%;
+   /* padding: 10px; */
+   margin: 5px;
+   padding: 2px;
+}
+.list-n{
+  color: #0c202e;
+    font-family: clashG;
+    font-size: 1.0rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
 }

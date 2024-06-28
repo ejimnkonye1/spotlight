@@ -114,9 +114,9 @@ const selectedListitem = displaylist[selectedListIndex];
       <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0" style={{width:'23%'}}>
         <div className="user">
           
-          <div className="list border-bottom p-4">
-            <CiViewList size={20} className="viewl" />
-            <span>Your list</span>
+          <div className="list border-bottom p-1">
+            <CiViewList size={40} className="viewl" />
+            <p className="list-n">Your list</p>
           </div>
   
           <div className="user-list">
