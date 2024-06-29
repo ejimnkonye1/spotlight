@@ -10,6 +10,9 @@ import { CiViewList } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { Listdet } from "./listdet";
 import { useNavigate } from "react-router-dom";
+import { Mylist } from "./list";
+import { Button } from "bootstrap";
+import "../css/search.css"
 const Ex = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -61,11 +64,7 @@ const navigate = useNavigate()
       
       // Set the newly created list as the selected list
       setSelectedList(newList);
-      
-      // Clear the new list name input field
       setNewListName('');
-      
-      // Close the main modal and clear the selected movie (if necessary)
       setShowMainModal(false);
       setSelectedMovie(null);
     }
@@ -110,107 +109,82 @@ const selectedListitem = displaylist[selectedListIndex];
 
   return (
     <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-12">
-          <div id="chat3">
-            <div className="">
-              <div className="row">
-                <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0">
-                  <div className="user">
-                    <div className="list border-bottom p-4">
-                      <CiViewList size={40} className="viewl" /> <span>Your list</span>
-                    </div>
-                    <div className="user-list">
-                      <div className="container mt-3">
-                        <div className="content">
-                        <ul className="list-group">
-  {displaylist.map((listItem, idx) => (
-    <li  
-      key={idx}
-    className={`list-group-item list-group-item-primary custom-background
+    <div className="row">
       
-      ${selectedListIndex === idx}`}
-      onClick={() => handleListLinkClick(idx)}
-      
-      style={{
-        backgroundImage: listItem.movies.length > 0 ? `url(https://image.tmdb.org/t/p/w200${listItem.movies[0].poster_path})` : 'none',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        borderRadius: '10px',
-        color: 'white',
-        padding: '10px'
-      }}
-    >
-      <div style={{ fontWeight: 'bold', }}>
-        {listItem.listName}
-      </div>
-      <div className="text-danger" style={{ marginTop: '10px' }}>
-        {listItem.movies.length} {listItem.movies.length === 1 ? 'movie' : 'movies'}
-      </div>
-    </li>
-  ))}
-</ul>
-
-
-
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-2 mt-5 content-bottom border-top">
-                      <p className="text-center mb-0">Footer content</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 col-lg-7 col-xl-9 cl card">
-                  <div>
-     
-               {showlistpage ? (
-                   <div>
-                  <Listdet 
-                  setshowlistpage={setshowlistpage}
+      <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0" style={{width:'23%'}}>
+        <div className="user">
+          
+          <div className="list border-bottom p-1">
+            <CiViewList size={40} className="viewl" />
+            <p className="list-n">Your list</p>
+          </div>
+  
+          <div className="user-list">
+            <div className="container mt-3">
+              <div className="content">
+                <Mylist
                   displaylist={displaylist}
-                  selectedListitem={selectedListitem}
-                  />
-                   
-                   </div>
-                    ):(
-                    <div>
-                      {showMainModal && (
-                   <Modal
-                   showMainModal={showMainModal}
-                   handleCloseMainModal={handleCloseMainModal}
-                   setShowMainModal={setShowMainModal}
-                   addtofav={addtofav}
-                   movie={selectedMovie}
-                   newListName={newListName}
-                   setNewListName={setNewListName}
-                   handleCreateNewList={handleCreateNewList}
-                   selectedList={selectedList}
-                   setSelectedList={setSelectedList}
-                   displaylist={displaylist}
-                 />
-                  )}
-                  <div className="search-results">
-                    <Searchresult searchResults={searchResults} handleShowMainModal={handleShowMainModal} />
-                  </div>
-                  <Searchbar
-                    setQuery={setQuery}
-                    handleSearch={handleSearch}
-                    query={query}
-                  />
-                    </div>
-                    )}
-                  
-                  </div>
-                 
-
-                </div>
+                  selectedListIndex={selectedListIndex}
+                  handleListLinkClick={handleListLinkClick}
+                />
               </div>
             </div>
           </div>
+          {/* Footer Content */}
+          <div className="p-2 mt-4 content-bottom border-top">
+            {/* <p className="text-center mb-0">Footer content</p> */}
+            <button className="btn btn-primary">Signup</button>
+          </div>
         </div>
       </div>
+  
+    
+      <div className="col-md-6 col-lg-7 col-xl-9 cl border" style={{width:'77%'}}>
+        
+         {showlistpage ? (
+          <Listdet
+            setshowlistpage={setshowlistpage}
+            displaylist={displaylist}
+            selectedListitem={selectedListitem}
+          />
+        ) : (
+          <>
+            
+            {showMainModal && (
+              <Modal
+                showMainModal={showMainModal}
+                handleCloseMainModal={handleCloseMainModal}
+                setShowMainModal={setShowMainModal}
+                addtofav={addtofav}
+                movie={selectedMovie}
+                newListName={newListName}
+                setNewListName={setNewListName}
+                handleCreateNewList={handleCreateNewList}
+                selectedList={selectedList}
+                setSelectedList={setSelectedList}
+                displaylist={displaylist}
+              />
+            )}
+  
+            <div className="search-results">
+              <Searchresult
+                searchResults={searchResults}
+                handleShowMainModal={handleShowMainModal}
+                query={query}
+              />
+            </div>
+        
+            <Searchbar
+              setQuery={setQuery}
+              handleSearch={handleSearch}
+              query={query}
+            />
+          </>
+        )} 
+      </div>
     </div>
+  </div>
+  
   );
 };
 

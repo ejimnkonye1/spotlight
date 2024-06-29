@@ -22,7 +22,7 @@ export const Listdet = ({ setshowlistpage, displaylist, selectedListitem }) => {
   const selectedList = displaylist[selectedListIndex];
 
   return (
-    <div>
+    <div className="container " style={{width:'80%'}}>
       <nav className="navbar">
         <div className="container d-flex justify-content-between align-items-center">
           <div className="icon-head">
@@ -32,26 +32,34 @@ export const Listdet = ({ setshowlistpage, displaylist, selectedListitem }) => {
             <h4>{selectedListitem?.listName} ({selectedListitem?.movies.length})</h4>
           </div>
           <div className="icon-head m-2">
-            <AiFillDelete className="plus-icon" />
+            <AiFillDelete className="plus-icon text-danger" />
           </div>
         </div>
       </nav>
 
-      <div className="container mt-4">
+      <div className="container mt-4 list-results">
         {selectedListitem && (
           <div className="row">
             {selectedListitem.movies.map((movie, index) => (
               <div key={index} className="col-md-4 mb-4">
-                <div className="card">
+                <div className="card rounded " style={{width:'100%'}}>
                   <img
                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                     className="card-img-top"
                     alt={movie.title}
                     width="100%"
-                    height="auto"
+                    
+                    height="150px"
                   />
                   <div className="card-body">
-                    <p className="card-text">{movie.title}</p>
+                  <h6 className="card-text text-secondary">{movie.title}</h6>
+                    <div className="d-flex justify-content-between">
+                    <p className="card-text text-danger">Delete</p>
+                    <a className="card-text text-secondary">More info</a>
+                  
+                      </div>
+                    
+
                   </div>
                 </div>
               </div>
