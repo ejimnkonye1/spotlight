@@ -13,7 +13,8 @@ export const Modal = ({ showMainModal,
   displaylist,
   handleCreateNewList,
   selectedList,
-  setSelectedList, }) => {
+  setSelectedList, 
+  selectedListIndex,}) => {
   const [showNestedModal, setShowNestedModal] = useState(false);
 
   const handleShowNestedModal = () => {
@@ -39,7 +40,14 @@ const createlist = (movie) => {
   const handleAddToFav = () => {
     addtofav(movie, listName);
   };
+  const listItems = document.querySelectorAll('ul li');
 
+  listItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      listItems.forEach((otherItem) => otherItem.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
   return (
     <>
     {showNestedModal? (
@@ -93,23 +101,41 @@ const createlist = (movie) => {
 </div>
           <div className="modal-body">
 
-            <ul>
-              {displaylist.map((listItem, index) => (
-                <li key={index}>
-                  <label>
-                    <input
-                      type="radio"
-                      name="selectedList"
-                      value={listItem.listName}
-                      checked={selectedList === listItem}
-                      onChange={() => setSelectedList(listItem)}
-                    />
-                    {listItem.listName}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          
+            
+            <ul className="list-group">
+  {displaylist.map((listItem, idx) => (
+    <li
+      key={idx}
+      className={`list-group-  mb-3 `}
+      value={listItem.listName}
+      checked={selectedList === listItem}
+      onClick={() => setSelectedList(listItem)}
+      style={{
+        backgroundImage: listItem.movies.length > 0 ? `url(https://image.tmdb.org/t/p/w200${listItem.movies[0].poster_path})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        borderRadius: '10px',
+        color: 'white',
+        padding: '10px',
+        cursor: 'pointer',
+        height: '60px',
+        transition:'all 0.4s',
+        border: selectedListIndex === idx ? 'active' : '' // Add border style conditionally
+      }}
+    >
+      
+      <div style={{ fontWeight: 'bold' }}>
+        {listItem.listName}
+      </div>
+      <div className="text-danger" style={{  }}>
+              {listItem.movies.length} {listItem.movies.length === 1 ? 'movie' : 'movies'}
+            </div>
+    </li>
+  ))}
+</ul>
+
+
+
             <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={handleShowNestedModal}> <FiPlus style={{textDecoration:'underline'}} /> new list</a>
           </div>
           <div className="modal-footer">
