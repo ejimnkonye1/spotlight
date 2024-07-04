@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Mylist } from "./list";
 import { Button } from "bootstrap";
 import "../css/search.css"
+import { HeaderSm } from "./smheader";
 const Ex = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -110,8 +111,18 @@ const selectedListitem = displaylist[selectedListIndex];
   return (
     <div className="container-fluid">
     <div className="row">
-      
-      <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0 hambuger" style={{width:'23%'}}>
+      {showlistpage ? (
+''
+      ):(
+        <HeaderSm 
+        displaylist={displaylist}
+        showlistpage={showlistpage}
+        selectedListIndex={selectedListIndex}
+        handleListLinkClick={handleListLinkClick}
+        />
+      )}
+     
+      <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0  hambuger" style={{width:'23%'}}>
         <div className="user">
           
           <div className="list border-bottom p-1">
