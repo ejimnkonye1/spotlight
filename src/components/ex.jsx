@@ -111,7 +111,7 @@ const selectedListitem = displaylist[selectedListIndex];
     <div className="container-fluid">
     <div className="row">
       
-      <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0" style={{width:'23%'}}>
+      <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0 hambuger" style={{width:'23%'}}>
         <div className="user">
           
           <div className="list border-bottom p-1">
@@ -139,7 +139,7 @@ const selectedListitem = displaylist[selectedListIndex];
       </div>
   
     
-      <div className="col-md-6 col-lg-7 col-xl-9 cl border" style={{width:'77%'}}>
+      <div className="col-md-6 col-lg-7 col-xl-9 cl border hambuger-2" style={{width:'77%'}}>
         
          {showlistpage ? (
           <Listdet

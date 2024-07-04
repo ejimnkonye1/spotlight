@@ -9,6 +9,7 @@ import { Moviedetails } from './components/details'
 import Ex from './components/ex'
 
 import { Listdet } from './components/listdet'
+import GeminiMovieSearch from './components/ge'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,7 +21,7 @@ function App() {
         <Route path='/' element={<Ex />} />
         <Route path='/movies/:id' element={<Moviedetails />} />
         <Route path='/list/:id' element={<Listdet />} />
-     
+        <Route path='/gem/' element={<GeminiMovieSearch />} />
        
       </Routes>
     </Router>

@@ -98,3 +98,19 @@ ul li.active {
 .list-group-item{
   background-color: transparent !important;
 }
+@media (max-width:765px) {
+  .hambuger{
+    display: none;
+  }
+  .hambuger-2{
+    width: 100% !important;
+  }
+  .search-item {
+    display: flex ;
+    flex-direction: column;
+  }
+  
+}
+.sm-screen-head{
+  display: none;
+}
