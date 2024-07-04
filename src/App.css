@@ -98,9 +98,9 @@ ul li.active {
 .list-group-item{
   background-color: transparent !important;
 }
-@media (max-width:765px) {
+@media (max-width:1000px) {
   .hambuger{
-    display: none;
+    display: none !important;
   }
   .hambuger-2{
     width: 100% !important;
@@ -113,4 +113,27 @@ ul li.active {
 }
 .sm-screen-head{
   display: none;
+}
+
+
+/*css for small screen header */
+.circle-img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px;
+  border-color: red;
+  
+}
+.log-out-icon{
+  width: 30px;
+  height: 30px;
+  border-radius: 20%;
+  margin: 10px;
+  border: 1px solid rgb(255, 158, 158);
+  background-color: #ffebeb;
+  color: red;
+}
+.sm-screen-head{
+  position: sticky;
 }
