@@ -87,3 +87,30 @@
   font-family: manrope;
   font-weight: 500;
 }
+ul li {
+  border: 1px solid transparent; /* add a transparent border to all li elements */
+}
+
+ul li.active {
+  border-color: rgb(72, 69, 234);
+
+}
+.list-group-item{
+  background-color: transparent !important;
+}
+@media (max-width:765px) {
+  .hambuger{
+    display: none;
+  }
+  .hambuger-2{
+    width: 100% !important;
+  }
+  .search-item {
+    display: flex ;
+    flex-direction: column;
+  }
+  
+}
+.sm-screen-head{
+  display: none;
+}
