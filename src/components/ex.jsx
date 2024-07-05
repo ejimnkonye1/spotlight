@@ -109,9 +109,8 @@ const selectedListitem = displaylist[selectedListIndex];
 
 
   return (
-    <div className="container-fluid">
-    <div className="row">
-      {showlistpage ? (
+    <div className="container-fluid main-h">
+        {showlistpage ? (
 ''
       ):(
         <HeaderSm 
@@ -121,6 +120,17 @@ const selectedListitem = displaylist[selectedListIndex];
         handleListLinkClick={handleListLinkClick}
         />
       )}
+    <div className="row">
+      {/* {showlistpage ? (
+''
+      ):(
+        <HeaderSm 
+        displaylist={displaylist}
+        showlistpage={showlistpage}
+        selectedListIndex={selectedListIndex}
+        handleListLinkClick={handleListLinkClick}
+        />
+      )} */}
      
       <div className="col-md-6 col-lg-5 col-xl-3 mb-4 mb-md-0  hambuger" style={{width:'23%'}}>
         <div className="user">

@@ -5,13 +5,17 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Mylist } from "./list";
 export const HeaderSm = ({displaylist,selectedListIndex, handleListLinkClick}) => {
     return(
-<div className="navbar navbar-expand-lg bg-body-tertiary d-lg-none d-md-block sm-screen-head fixed-top">
-<nav class="navbar  d-lg-none d-md-block sm-screen-head">
-  <div class="container-fluid">
-  <RxHamburgerMenu data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" />
-    
+<div className="  ">
+<nav class="navbar   d-lg-none  d-md-block sm-screen-head">
   
-    <div className="d-flex">
+  <div class="container">
+    <div>
+    <RxHamburgerMenu data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" />
+    
+    </div>
+
+  
+    <div className="d-flex ml-auto">
   <div className="img-contaier-sm">
    <img src={img} className="circle-img" />
   </div>
