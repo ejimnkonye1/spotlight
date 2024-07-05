@@ -3,6 +3,10 @@
     height: 484px;
     overflow-y: auto;
 }
+.search-results::-webkit-scrollbar{
+  display: none;
+  
+}
 .user-list{
     position: relative;
     height: 400px;
@@ -212,6 +216,7 @@ padding: 2px;
   position: relative;
   /* width: 400px;
   height: 500px; */
+  display: inline-block;
 }
 .percentage-circle {
   position: absolute;
@@ -295,5 +300,58 @@ padding: 2px;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
+}
+.res-cont {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.profile-card {
+  flex: 1 1 300px; /* adjust the width of the profile card */
+}
+.search-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.image-container {
+  flex: 1 1 400px; /* adjust the width of the image container */
+  margin-bottom: 1rem; /* add some margin at the bottom of the image container */
+  width: 100%;
+}
+
+.search-item > div:nth-child(2) {
+  flex: 1 1 100%; /* make the text container full-width on small screens */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center the text container */
+}
+
+.search-title {
+  text-align: center; /* center the title */
+}
+
+.search-overview {
+  text-align: center; /* center the overview */
+  margin-bottom: 1rem; /* add some margin at the bottom of the overview */
+}
+
+.more-se {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center the buttons */
+  width: 100%;
+}
+.big-button-more{
+  width: 100%;
+}
+.blue-butto{
+  width: 100% !important;
+}
+.sm-but{
+  width: 100%;
 }
 }

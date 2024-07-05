@@ -8,7 +8,7 @@ import { LuPencil } from "react-icons/lu";
 import { SlReload } from "react-icons/sl";
 export const Searchresult = ({ searchResults, handleShowMainModal, query }) => {
   return (
-    <div>
+    <div className="res-cont">
       <div class="profile-card mt-3 m-4">
         <div class="profile-header">
             <img src={img} alt="Profile Picture" class="profile-img" />
@@ -20,9 +20,9 @@ export const Searchresult = ({ searchResults, handleShowMainModal, query }) => {
 
 
         </div>
-        <hr className="mt-4"/>
+        <hr className="mt-4 "/>
     </div>
-   <div className="m-4">
+   <div className="m-4 " >
     <h4 className="top">Top Results</h4>
    {searchResults.map((movie) => (
         
@@ -52,7 +52,7 @@ export const Searchresult = ({ searchResults, handleShowMainModal, query }) => {
                 About This Movie <MdArrowOutward />
               </button>
             </div>
-            <div className="d-flex justify-content-between ">
+            <div className="d-flex justify-content-between sm-but ">
               <button
                 className="sec-butto text-styl"
                 onClick={() => handleShowMainModal(movie)}
